@@ -301,8 +301,8 @@
     $("#text-area").on("click", function(){
         $("#jqk-toggle-btn").click();
         $("#jq-keyboard").css('top', 140+$("#text-area").position().top+$("#text-area").height());
-        $("#jq-keyboard").css('left', 300+$("#text-area").position().left)
-        $("#jq-keyboard").css('right', 300+$("#text-area").position().left)
+        $("#jq-keyboard").css('left', $("#text-area").position().left)
+        $("#jq-keyboard").css('right', $("#text-area").position().left)
     })
     $(function () {
       "use strict";
