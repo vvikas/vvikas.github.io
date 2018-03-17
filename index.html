@@ -298,13 +298,17 @@
     if(window.mobilecheck()){
         alert("This keyboard is not suited for Mobile devices!!!\n Please use a desktop browser to use Sharada Keyboard.");
     }
-    $("#text-area").on("click", function(){$("#jqk-toggle-btn").click();})
+    $("#text-area").on("click", function(){
+        $("#jqk-toggle-btn").click();
+        $("#jq-keyboard").css('top', 140+$("#text-area").position().top+$("#text-area").height());
+        $("#jq-keyboard").css('left', 300+$("#text-area").position().left)
+        $("#jq-keyboard").css('right', 300+$("#text-area").position().left)
+    })
     $(function () {
       "use strict";
 
       jqKeyboard.init();
     });
-    $("#jq-keyboard").css('bottom', $("#text-area").position().top+$("#text-area").height()-$("#jq-keyboard").height());
   </script>
   <p style="position:absolute; bottom:0px;">Attributions : <br>
      * The Sharada font is from : [https://github.com/googlei18n/noto-fonts-alpha] *<br>
