@@ -197,18 +197,19 @@ var jqKeyboard = jqKeyboard || {};
       var $button = $('<button>').addClass(BUTTON_CLASS);
 
       // Normal/regular
-      if (button.length === 1) {
+      if (button.length === 1 || button.length === 2) {
         $button.addClass(NORM_BTN_CLASS)
           .data('val', button) // Container for the value.
           .html(button);
       }
       // Shift-active
-      else if (button.length === 3) {
+      else if (button.indexOf("|") != -1) {
+        var normalShift=button.split("|")
         $button.addClass(SHFT_BTN_CLASS)
-          .data('val', button[0]) // Container for the current value. 'Normal' by default.
-          .data('shift', button[2]) // Defines the shift value
-          .data('normal', button[0]) // Defines the normal value
-          .html(button[0]);
+          .data('val', normalShift[0]) // Container for the current value. 'Normal' by default.
+          .data('shift', normalShift[1]) // Defines the shift value
+          .data('normal', normalShift[0]) // Defines the normal value
+          .html(normalShift[0]);
       }
       // Special
       else if (button.indexOf('<<') !== -1 && button.indexOf('>>') !== -1) {
@@ -408,7 +409,7 @@ var jqKeyboard = jqKeyboard || {};
           EventManager._onActiveElemTextManipulation(function (selection, currentContent) {
             return {
               updatedContent: Helpers.insertCharacter(currentContent, selection, selectedBtnVal),
-              caretOffset: 1
+              caretOffset: selectedBtnVal.length
             };
           });
 

@@ -8,7 +8,7 @@
   <style>
      @font-face {
        font-family: sharada_font;
-       src: url(/NotoSansSharada-Regular.ttf);
+       src: url(NotoSansSharada-Regular.ttf);
      }
 
     *{
@@ -18,8 +18,8 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-  <script src="/jqKeyboard/development/build/jqkeyboard.js"></script>
-  <script src="/jqKeyboard/layouts/jqk.layout.en-ka.js"></script>
+  <script src="jqkeyboard.js"></script>
+  <script src="jqk.layout.ka-en.js"></script>
   <style type="text/css">
     /* embed styles (todo problem with external css) */
 
@@ -112,7 +112,7 @@
       border-bottom: 3px solid #CCC;
       margin: 0 2px;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, Helvetica, sans-serif, sharada_font;
       font-size: 15px;
       font-weight: 700;
       color: #666;
@@ -216,7 +216,7 @@
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, Helvetica, sans-serif, sharada_font;
     }
 
     #button-hint {
@@ -284,38 +284,24 @@
 </head>
 
 <body>
-  <p>Sharada text: &#x1118F;&#x11180;</p>
   <section id="fields">
-    <input type="text" placeholder="Type something" size="30" /><br/>
-    <textarea rows="5" cols="30" placeholder=""></textarea><br/>
-    <a href="https://github.com/hawkgs/jqKeyboard">Back to repo</a>
+    <p style="font-size: -webkit-xxx-large; color: orangered;">&#x1118F;&#x11180;</p>
+    <textarea id="text-area" rows="5" cols="30" placeholder="Type something"></textarea><br/>
   </section>
-  <div id="button-hint">
-    <p id="info-txt">Click on the icon in order<br/>to active the keyboard</p>
-  </div>
-  <div id="balloon"></div>
   <script type="text/javascript">
+    $("#text-area").on("click", function(){$("#jqk-toggle-btn").click()})
     $(function () {
       "use strict";
-
-      var $balloon = $("#balloon"),
-        $infoTxt = $("#info-txt");
-
-      setTimeout(function () {
-        $balloon.addClass("shrink");
-      }, 500);
-
-      $infoTxt.delay(1000).fadeIn();
-
-      $(this).click(function () {
-        $("#button-hint").fadeOut();
-        $balloon.fadeOut();
-        $infoTxt.fadeOut();
-      });
 
       jqKeyboard.init();
     });
   </script>
+  <p style="position:absolute; bottom:0px;">Attributions : <br>
+     * The Sharada font is from : [https://github.com/googlei18n/noto-fonts-alpha] *<br>
+     * The Keyboard is a modified and improved version of required parts of : [https://github.com/hawkgs/jqKeyboard] *<br>
+     * The Sharada Unicodes are from : [http://www.unicode.org/charts/PDF/U11180.pdf] *<br>
+     * This Unicode based Sharada Keyboard has been created on Saturday,17th March 2018 by Vikas Veshishth Gargay *
+  </p>
 </body>
 
 </html>
