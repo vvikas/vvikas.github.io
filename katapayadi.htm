@@ -53,6 +53,18 @@
 </div>
 
 <script type="text/javascript">
+  
+    data = [["0","ṛc"],
+            ["0","niś"],
+            ["0","nau"],
+            ["0","it"],
+            ["0","snuh"],
+            ["0","āṅ"],
+            ["0","iṭ"],
+            ["0","nañ"],
+            ["0","ni"],
+            ["0","am"]]; 
+  
     var rows = [],
         search = document.getElementById('search');
 
@@ -63,12 +75,12 @@
      * markup *string* - markup that will be added to the DOM
      * active *bool* - specifies if row is suitable by search phrase
     */
-    for(var i = 1; i <= 50000; i++){
+    for(var i = 0; i < data.length; i++){
       rows.push({
-        values: [i, i*100/500+'%'],
+        values: data[i],
         markup: '<tr>' +
-                  '<td>' + i + '</td>' +
-                  '<td>' + (i*100/500+'%') + '</td>' +
+                  '<td>' + data[i][0] + '</td>' +
+                  '<td>' + data[i][1] + '</td>' +
                 '</tr>',
         active: true
       });
