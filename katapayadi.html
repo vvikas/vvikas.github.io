@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-16" />
+  <title>Memorize numbers Using Katapayadi</title>
+
+  <style>
+
+    .clusterize, input{
+      width: 300px !important;
+    }
+
+    table{
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    body {
+      margin: 20px;
+    }
+
+  </style>
+  
+  <link href="clusterize.css" rel="stylesheet">
+  <script src="clusterize.min.js"></script>
+  
+</head>
+
+<body>
+<div class="container">
+  <input type="text" id="search" placeholder="Type row number or percent"/>
+
+  <div class="clusterize">
+    <table>
+      <thead>
+        <tr>
+          <th>Row</th>
+          <th>Percent</th>
+        </tr>
+      </thead>
+    </table>
+    <div id="scrollArea" class="clusterize-scroll">
+      <table>
+        <tbody id="contentArea" class="clusterize-content">
+          <tr class="clusterize-no-data">
+            <td>Loading data…</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> 
+  </div>
+</div>
+
+<script type="text/javascript">
+    var rows = [],
+        search = document.getElementById('search');
+
+    /* Fill array with data
+     *
+     * Fields:
+     * values *array* - value of each field (in case use of table)
+     * markup *string* - markup that will be added to the DOM
+     * active *bool* - specifies if row is suitable by search phrase
+    */
+    for(var i = 1; i <= 50000; i++){
+      rows.push({
+        values: [i, i*100/500+'%'],
+        markup: '<tr>' +
+                  '<td>' + i + '</td>' +
+                  '<td>' + (i*100/500+'%') + '</td>' +
+                '</tr>',
+        active: true
+      });
+    }
+
+    /*
+    * Fetch suitable rows
+    */
+    var filterRows = function(rows) {
+      var results = [];
+      for(var i = 0, ii = rows.length; i < ii; i++) {
+        if(rows[i].active) results.push(rows[i].markup)
+      }
+      return results;
+    }
+
+    /*
+    * Init clusterize.js
+    */
+    var clusterize = new Clusterize({
+      rows: filterRows(rows),
+      scrollId: 'scrollArea',
+      contentId: 'contentArea'
+    });
+
+    /*
+    * prefix search
+    */
+    var onSearch = function() {
+      for(var i = 0, ii = rows.length; i < ii; i++) {
+        var suitable = false;
+        if(rows[i].values[0].toString().startsWith(search.value)){
+          suitable = true;
+        }
+        // for(var j = 0, jj = rows[i].values.length; j < jj; j++) {
+        //   if(rows[i].values[j].toString().indexOf(search.value) + 1)
+        //     suitable = true;
+        // }
+        rows[i].active = suitable;
+      }
+      clusterize.update(filterRows(rows));
+    }
+    search.oninput = onSearch;
+
+</script>
+
+</body>
+</html>
