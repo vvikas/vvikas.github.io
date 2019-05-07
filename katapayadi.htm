@@ -76,7 +76,8 @@
         values: data[i],
         markup: '<tr>' +
                   '<td>' + data[i][0] + '</td>' +
-                  '<td>' + data[i][1] + '</td>' +
+                  '<td><a href=\'https://www.sanskritdictionary.com/?iencoding=iast&q='  + 
+                   data[i][1] + '&lang=sans&action=Search\'>' + data[i][1] + '</a></td>' +
                 '</tr>',
         active: true
       });
